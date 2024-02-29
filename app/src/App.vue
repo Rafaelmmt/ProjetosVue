@@ -1,30 +1,67 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { reactive, onMounted } from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+// reactive state
+const apiData = () => {
+  axios.get('https://opentdb.com/api.php?amount=1&category=20')
+  .then((response) => {
+    console.log(response.data.results)
+  })
+} 
+
+// functions that mutate state and trigger updates
+/* function increment() {
+  count.value++
+} */
+
+// lifecycle hooks
+onMounted (apiData)
+
 </script>
 
 <template>
+  
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <p>Humano 0 x 0 Computador</p><hr>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+
+  <div class="main-div">
+    <h1>0</h1>
+
+    <input type="radio" name="options" value="true">
+    <label>Verdadeiro</label><br>
+
+    <input type="radio" name="options" value="false">
+    <label>Falso</label><br>
+
+    <button class="btn-send" type="button">Enviar</button>
+    
+  </div>
+
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.main-div {
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px auto;
+  max-width: 960px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.main-div input{
+  margin: 12px 12px;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.btn-send {
+  margin-top: 12px;
+  height: 40px;
+  min-width: 120px;
+  padding: 0 16px;
+  color: #fff;
+  background: #1857c0;
+  border: 1px solid #1857c0;
+  cursor: pointer;
 }
+
 </style>
